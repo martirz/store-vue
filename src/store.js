@@ -10,13 +10,16 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_BOOK: (state, data) => {
-      state.book = data.bookId;
-      state.fullPath = data.fullPath;
+      state.book = data;
+    },
+    SET_FULLPATH: (state, data) => {
+      state.fullPath = data;
     }
   },
   actions: {
     setBook: (context, payload) => {
-      context.commit('SET_BOOK', payload)
+      context.commit('SET_BOOK', payload.bookId)
+      context.commit('SET_FULLPATH', payload.fullPath)
     }
   },
   getters: {
