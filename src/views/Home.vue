@@ -1,18 +1,24 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <p>{{ getBook }}</p>
+    <p>{{ getFullPath }}</p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "home",
   components: {
-    HelloWorld
-  }
+  },
+  computed: {
+    ...mapGetters(['getBook', 'getFullPath'])
+  },
+  created() {
+    let bookId = this.$route.params.bookId;
+    let fullPath = this.$route.query.fullPath;
+    this.$store.dispatch('setBook', {bookId: bookId, fullPath: fullPath});
+  },
 };
 </script>
